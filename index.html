@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Morsy Chat</title>
+  <title>Morse Chat</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app">
-    <h1>Morsy Chat</h1>
+    <h1>Morse Chat</h1>
     <div>
       <input type="text" id="username" placeholder="Entrez votre nom...">
+    </div>
+    <div>
+      <button onclick="toggleDarkMode()">Mode Sombre</button>
+      <button onclick="toggleSound()">Couper le Son</button>
     </div>
     <div class="chat-container">
       <div id="messages"></div>
