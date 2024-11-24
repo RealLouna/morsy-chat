@@ -1,0 +1,8 @@
+version: "2"  # Ajoute la version au fichier de configuration
+
+authtoken: 2pIlm8TpOVnQoK7Ryr7eDJ7BUlF_6J4k7xBKzfvZdMTFsz71o
+tunnels:
+  my-tunnel:
+    addr: 4000
+    proto: http
+    hostname: mondomaine.com
