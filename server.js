@@ -15,8 +15,14 @@ io.on('connection', (socket) => {
 
   // Recevoir et émettre un message
   socket.on('sendMessage', (message) => {
-    console.log('Message reçu :', message);  // Vérifie que le message est bien reçu
+    console.log('Message reçu :', message);
     io.emit('receiveMessage', message);
+  });
+
+  // Recevoir et émettre une image
+  socket.on('sendImage', (message) => {
+    console.log('Image reçue :', message);
+    io.emit('receiveImage', message);
   });
 
   socket.on('disconnect', () => {

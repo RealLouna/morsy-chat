@@ -11,11 +11,22 @@
     <h1>Chat en Temps Réel</h1>
     <div>
       <input type="text" id="username" placeholder="Entrez votre nom...">
+      <input type="color" id="color" value="#000000">
+      <select id="emoji">
+        <option value="😊">😊</option>
+        <option value="😂">😂</option>
+        <option value="😍">😍</option>
+        <option value="😎">😎</option>
+        <option value="😭">😭</option>
+      </select>
     </div>
     <div class="chat-container">
       <div id="messages"></div>
       <input type="text" id="message-input" placeholder="Tapez votre message...">
       <button onclick="sendMessage()">Envoyer</button>
+      <button onclick="toggleDarkMode()">Mode Sombre</button>
+      <button onclick="uploadImage()">Envoyer Image</button>
+      <input type="file" id="image-input" style="display: none;" accept="image/*">
     </div>
   </div>
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
