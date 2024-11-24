@@ -4,6 +4,12 @@ let isDarkMode = false;
 // Initialiser Socket.IO
 const socket = io('https://reallouna.loca.lt');
 
+// Charger les messages à la connexion
+socket.on('loadMessages', (loadedMessages) => {
+  messages = loadedMessages;
+  displayMessages();
+});
+
 // Fonction pour envoyer un message
 function sendMessage() {
   const username = document.getElementById('username').value;
@@ -12,14 +18,14 @@ function sendMessage() {
   const messageInput = document.getElementById('message-input');
   const messageText = messageInput.value;
 
-  console.log('Envoi du message :', { username, text: messageText, color, emoji });  // Vérifie le message avant l'envoi
+  console.log('Envoi du message :', { username, text: messageText, color, emoji });
   socket.emit('sendMessage', { username, text: messageText, color, emoji });
   messageInput.value = '';
 }
 
 // Recevoir un message
 socket.on('receiveMessage', (message) => {
-  console.log('Message reçu :', message);  // Vérifie que le message est bien reçu
+  console.log('Message reçu :', message);
   messages.push(message);
   displayMessages();
 });
@@ -31,7 +37,7 @@ function displayMessages() {
   messages.forEach(message => {
     const newMessageDiv = document.createElement('div');
     if (message.image) {
-      newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: <img src="${message.image}" style="max-width: 100%; height: auto;"></p>`;
+      newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: <img src="${message.image}" alt="${message.description}" style="max-width: 100%; height: auto;">${message.description}</p>`;
     } else {
       newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: ${message.text}</p>`;
     }
@@ -63,8 +69,9 @@ function uploadImage() {
       const color = document.getElementById('color').value;
       const emoji = document.getElementById('emoji').value;
       const imageData = e.target.result;
-      console.log('Envoi de l\'image :', { username, color, emoji, image: imageData });
-      socket.emit('sendImage', { username, color, emoji, image: imageData });
+      const description = document.getElementById('image-description').value;
+      console.log('Envoi de l\'image :', { username, color, emoji, image: imageData, description });
+      socket.emit('sendImage', { username, color, emoji, image: imageData, description });
     };
     reader.readAsDataURL(file);
   };

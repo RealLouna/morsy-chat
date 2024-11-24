@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat en Temps Réel</title>
+  <title>Talki'n</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app">
-    <h1>Chat en Temps Réel</h1>
+    <h1>Talki'n</h1>
     <div>
       <input type="text" id="username" placeholder="Entrez votre nom...">
       <input type="color" id="color" value="#000000">
@@ -27,6 +27,7 @@
       <button onclick="toggleDarkMode()">Mode Sombre</button>
       <button onclick="uploadImage()">Envoyer Image</button>
       <input type="file" id="image-input" style="display: none;" accept="image/*">
+      <input type="text" id="image-description" placeholder="Description de l'image">
     </div>
   </div>
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
