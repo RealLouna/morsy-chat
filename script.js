@@ -9,6 +9,7 @@ const morseDict = {
 
 let isDarkMode = false;
 let isSoundMuted = false;
+let messages = [];
 
 // Fonction pour convertir texte en morse
 function textToMorse(text) {
@@ -31,15 +32,29 @@ function sendMessage() {
 
 // Recevoir un message
 socket.on('receiveMessage', (message) => {
-  const messagesDiv = document.getElementById('messages');
-  const newMessageDiv = document.createElement('div');
-  newMessageDiv.innerHTML = `<p><strong>${message.username}</strong>: ${message.text} <br><strong>Morse:</strong> ${message.morse}</p>`;
-  messagesDiv.appendChild(newMessageDiv);
+  messages.push(message);
+  displayMessages();
 
   if (!isSoundMuted) {
     playMorseSound(message.morse);
   }
 });
+
+// Fonction pour afficher les messages
+function displayMessages() {
+  const messagesDiv = document.getElementById('messages');
+  messagesDiv.innerHTML = ''; // Réinitialiser la liste des messages
+  messages.forEach(message => {
+    const newMessageDiv = document.createElement('div');
+    newMessageDiv.innerHTML = `<p><strong>${message.username}</strong>: ${message.text} <br><strong>Morse:</strong> ${message.morse}</p>`;
+    messagesDiv.appendChild(newMessageDiv);
+  });
+}
+
+// Actualiser la liste des messages toutes les secondes
+setInterval(() => {
+  displayMessages();
+}, 1000);
 
 // Fonction pour basculer le mode sombre
 function toggleDarkMode() {
