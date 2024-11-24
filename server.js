@@ -23,6 +23,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  console.log('Serveur en cours d\'exécution sur le port 4000');
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
 });
