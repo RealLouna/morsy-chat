@@ -5,4 +5,4 @@ tunnels:
   my-tunnel:
     addr: 4000
     proto: http
-    hostname: mondomaine.com
+    hostname: thereallouna.io
