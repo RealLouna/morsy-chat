@@ -15,6 +15,7 @@ io.on('connection', (socket) => {
 
   // Recevoir et émettre un message
   socket.on('sendMessage', (message) => {
+    console.log('Message reçu :', message);  // Vérifie que le message est bien reçu
     io.emit('receiveMessage', message);
   });
 

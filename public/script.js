@@ -17,7 +17,7 @@ function textToMorse(text) {
 }
 
 // Initialiser Socket.IO
-const socket = io('http://localhost:4000');
+const socket = io('https://<ton-ngrok-url>.ngrok.io');  // Remplace par ton URL ngrok
 
 // Fonction pour envoyer un message
 function sendMessage() {
@@ -26,12 +26,14 @@ function sendMessage() {
   const messageText = messageInput.value;
   const morseMessage = textToMorse(messageText);
 
+  console.log('Envoi du message :', { username, text: messageText, morse: morseMessage });  // Vérifie le message avant l'envoi
   socket.emit('sendMessage', { username, text: messageText, morse: morseMessage });
   messageInput.value = '';
 }
 
 // Recevoir un message
 socket.on('receiveMessage', (message) => {
+  console.log('Message reçu :', message);  // Vérifie que le message est bien reçu
   messages.push(message);
   displayMessages();
 
@@ -96,8 +98,3 @@ function playTone(audioContext, startTime, duration) {
   gainNode.connect(audioContext.destination);
 
   gainNode.gain.setValueAtTime(1, startTime);
-  gainNode.gain.setValueAtTime(0, startTime + duration / 1000);
-
-  oscillator.start(startTime);
-  oscillator.stop(startTime + duration / 1000);
-}
