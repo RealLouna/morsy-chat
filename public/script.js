@@ -30,7 +30,11 @@ function displayMessages() {
   messagesDiv.innerHTML = ''; // Réinitialiser la liste des messages
   messages.forEach(message => {
     const newMessageDiv = document.createElement('div');
-    newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: ${message.text}</p>`;
+    if (message.image) {
+      newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: <img src="${message.image}" style="max-width: 100%; height: auto;"></p>`;
+    } else {
+      newMessageDiv.innerHTML = `<p><strong style="color: ${message.color};">${message.username} ${message.emoji}</strong>: ${message.text}</p>`;
+    }
     messagesDiv.appendChild(newMessageDiv);
   });
   console.log('Messages affichés :', messages);  // Affiche les messages actuels dans la console
@@ -59,6 +63,7 @@ function uploadImage() {
       const color = document.getElementById('color').value;
       const emoji = document.getElementById('emoji').value;
       const imageData = e.target.result;
+      console.log('Envoi de l\'image :', { username, color, emoji, image: imageData });
       socket.emit('sendImage', { username, color, emoji, image: imageData });
     };
     reader.readAsDataURL(file);
