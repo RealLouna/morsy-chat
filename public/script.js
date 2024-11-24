@@ -1,7 +1,7 @@
 let messages = [];
 
 // Initialiser Socket.IO
-const socket = io('http://localhost:4000');  // Remplace par ton URL si nécessaire
+const socket = io('https://reallouna.loca.lt/');  // Remplace par ton URL si nécessaire
 
 // Fonction pour envoyer un message
 function sendMessage() {
