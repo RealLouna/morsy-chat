@@ -1,23 +1,5 @@
-// Dictionnaire Morse
-const morseDict = {
-  'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
-  'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
-  'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
-  'Y': '-.--', 'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
-  '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.'
-};
-
-let isDarkMode = false;
-let isSoundMuted = false;
-let messages = [];
-
-// Fonction pour convertir texte en morse
-function textToMorse(text) {
-  return text.toUpperCase().split('').map(char => morseDict[char] || char).join(' ');
-}
-
-// Initialiser Socket.IO
-const socket = io('https://<ton-ngrok-url>.ngrok.io');  // Remplace par ton URL ngrok
+// Remplace <ton-ngrok-url> par https://4890-2a01-e0a-d81-32d0-8938-7da2-5a51-1350.ngrok-free.app
+const socket = io('https://4890-2a01-e0a-d81-32d0-8938-7da2-5a51-1350.ngrok-free.app');
 
 // Fonction pour envoyer un message
 function sendMessage() {
@@ -98,3 +80,8 @@ function playTone(audioContext, startTime, duration) {
   gainNode.connect(audioContext.destination);
 
   gainNode.gain.setValueAtTime(1, startTime);
+  gainNode.gain.setValueAtTime(0, startTime + duration / 1000);
+
+  oscillator.start(startTime);
+  oscillator.stop(startTime + duration / 1000);
+}
