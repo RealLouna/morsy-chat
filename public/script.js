@@ -30,10 +30,10 @@ function displayMessages() {
     newMessageDiv.innerHTML = `<p><strong>${message.username}</strong>: ${message.text}</p>`;
     messagesDiv.appendChild(newMessageDiv);
   });
+  console.log('Messages affichés :', messages);  // Affiche les messages actuels dans la console
 }
 
 // Actualiser la liste des messages toutes les secondes
 setInterval(() => {
   displayMessages();
 }, 1000);
-	
